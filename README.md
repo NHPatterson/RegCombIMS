@@ -8,7 +8,7 @@ Use of this code:
   
   2. Set the working directory to the cloned/downloaded folder
   
-  3. Install required packages
+  3. Install required packages listed at top of "DAN_agLDI_combination_script.R"
   
   4. Execute the code in "DAN_agLDI_combination_script.R"
   
