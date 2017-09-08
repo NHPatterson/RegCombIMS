@@ -13,7 +13,7 @@ require(plyr)
 
 #load:
 #set working directory to clone from github
-setwd("D:/RegCombIMS")
+#setwd("D:/RegCombIMS")
 
 load("./peak_data/DAN_peakdata.RData")
 load("./peak_data/AgLDI_peakdata.RData")
