@@ -1,14 +1,20 @@
 # RegCombIMS
-Code accompanying "Co-registration and analysis of multiple imaging mass spectrometry datasets targeting different analytes"
+Code accompanying "Co-registration and analysis of multiple imaging mass spectrometry datasets targeting different analytes".
+
 This repository contains code to demo the analysis pipeline described in "Co-registration and analysis of multiple imaging mass spectrometry datasets targeting different analytes"
 
-Use of this code:
+RegCombIMS extends Cardinal's excellent data structures for IMS for computational registration tasks using the RNiftyReg library.
 
-  1. Download or clone this repository
-  
-  2. Set the working directory to the cloned/downloaded folder
-  
-  3. Install required packages listed at top of "DAN_agLDI_combination_script.R"
-  
-  4. Execute the code in "DAN_agLDI_combination_script.R"
-  
+## Installation
+This package can be installed from github in R using the devtools package and following code:
+
+```R
+install.packages("devtools") # if you have not installed "devtools" package
+devtools::install_github("nhpatterson/RegCombIMS")
+```
+
+## Demo
+See demo example  in /scripts
+
+### Contact:
+Heath Patterson nathan.h.patterson@vanderbilt.edu

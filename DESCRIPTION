@@ -1,0 +1,17 @@
+Package: RegCombIMS
+Version: 0.1
+Date: 2018-02-22
+Title: Co-registration and combination of imaging mass spectrometry datasets
+Authors@R: person("Nathan 'Heath'", "Patterson", email = "nathan.h.patterson@vanderbilt.edu",
+  role = c("aut", "cre"))
+Maintainer: Nathan 'Heath' Patterson <nathan.h.patterson@vanderbilt.edu>
+Description: This package contains functions that integrate RNiftyReg registrations with imaging mass spectrometry datasets. This can be used to combine multi-modal IMS datasets into a single Cardinal container for data analysis.
+License: MIT
+LazyData: true
+Imports:
+	Cardinal,
+	RNiftyReg,
+	plyr
+URL: https://github.com/NHPatterson/RegCombIMS
+BugReports: https://github.com/NHPatterson/RegCombIMS/issues
+RoxygenNote: 6.0.1
