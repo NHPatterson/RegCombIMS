@@ -53,8 +53,8 @@ image(reg_s_to_he_nonlinear_pca$image, main= "Non-linear_AgLDI_pca")
 ##combine datasets: 
 
 #transform the datasets using their respective transformations
-tformed_d001_cer = ApplyNifty(d001_cer, reg_d_to_he_nonlinear_pca, padding=0, interpolation = 0)
-tformed_s000_cer = ApplyNifty(s000_cer, reg_s_to_he_nonlinear_pca, padding=0, interpolation = 0)
+tformed_d001_cer = applyNifty(d001_cer, reg_d_to_he_nonlinear_pca, padding=0, interpolation = 0)
+tformed_s000_cer = applyNifty(s000_cer, reg_s_to_he_nonlinear_pca, padding=0, interpolation = 0)
 
 image(d001_cer, mz=885.54, main="(-)DAN pre-transform")
 image(tformed_d001_cer, mz=885.54, main="(-)DAN non-linear transformed")
