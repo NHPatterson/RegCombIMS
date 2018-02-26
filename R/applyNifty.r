@@ -5,7 +5,6 @@
 #' @param niftyregtform the transformation developed during the RNiftyReg registration step
 #' @param padding zero padding used around the borders of the image to avoid out of frame pixels
 #' @param interpolation, passed to RNiftyReg. Defaults to nearest neighbor
-#' @import RNiftyReg
 #' @return cardinaldata_registered a registered "MSImageSet"
 
 
