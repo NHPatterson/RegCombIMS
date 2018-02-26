@@ -10,7 +10,6 @@ License: MIT
 LazyData: true
 Imports:
 	Cardinal,
-	RNiftyReg,
 	plyr
 URL: https://github.com/NHPatterson/RegCombIMS
 BugReports: https://github.com/NHPatterson/RegCombIMS/issues
