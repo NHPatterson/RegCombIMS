@@ -9,6 +9,9 @@ RegCombIMS extends Cardinal's excellent data structures for IMS for computationa
 This package can be installed from github in R using the devtools package and following code:
 
 ```R
+#install Cardinal following instructions at https://cardinalmsi.org/
+#install RNiftyReg
+install.packages("RNiftyReg")
 install.packages("devtools") # if you have not installed "devtools" package
 devtools::install_github("nhpatterson/RegCombIMS")
 ```
