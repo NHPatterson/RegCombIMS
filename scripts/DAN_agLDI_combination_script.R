@@ -66,7 +66,7 @@ image(tformed_s000_cer, mz=493.25, main="AgLDI non-linear transformed")
 iData(tformed_d001_cer) = iData(tformed_d001_cer) / max(iData(tformed_d001_cer))
 iData(tformed_s000_cer) = iData(tformed_s000_cer) / max(iData(tformed_s000_cer))
 
-DAN_AgLDI_comb <- combineReggedIMS(tformed_d001_cer,tformed_s000_cer,mz_offset=2000,sample_name="(-)DAN_AgLDI_comb_2000os")
+DAN_AgLDI_comb <- RegCombIMS::combineReggedIMS(tformed_d001_cer,tformed_s000_cer,mz_offset=2000,sample_name="(-)DAN_AgLDI_comb_2000os")
 
 image(DAN_AgLDI_comb , mz=885.54, main="(-)DAN, combined")
 image(DAN_AgLDI_comb , mz=2493.25, main="AgLDI, combined")
