@@ -5,4 +5,7 @@ export(boundBox)
 export(reduceCardinalCoord)
 export(resultToArray)
 export(combineReggedIMS)
+export(correlationQuery)
+export(getCorrelationMat)
+
 import(Cardinal)
