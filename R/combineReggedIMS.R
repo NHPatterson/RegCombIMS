@@ -3,42 +3,48 @@
 #' @description Combines datasets with an mz_offset (soon:or with a featureData label)
 #' @param cardinaldata1 an object of class "MSImageSet", first dataset
 #' @param cardinaldata2 an object of class "MSImageSet", second dataset
-#' @param mz_offset offset of the m/z axis between datasets
-#' @param sample_name passed as 'sample' in resultant "MSImageSet"
-#' @return a combined offset "MSImageSet"
+#' @param ds1_name name added to the data under @featureData$ds_origin for first dataset
+#' @param ds1_name name added to the data under @featureData$ds_origin for second dataset
+#' @param combined_name passed as 'sample' in resultant "MSImageSet"
+#' @return a combined  "MSImageSet"
 
 
-combineReggedIMS <- function(cardinaldata1,cardinaldata2,mz_offset=13000,sample_name="combined_ds"){
+combineReggedIMS <- function(cardinaldata1,cardinaldata2,ds1_name = "dataset1",ds2_name="dataset2" ,combined_name="combined_ds"){
   
-  #create bounding boxes around datasets
-  cardinaldata1 <-boundBox(cardinaldata1, xmax=max(c(max(cardinaldata1$x),max(cardinaldata2$x))),ymax=max(c(max(cardinaldata1$y),max(cardinaldata2$y))))
-  cardinaldata2 <-boundBox(cardinaldata2, xmax=max(c(max(cardinaldata1$x),max(cardinaldata2$x))),ymax=max(c(max(cardinaldata1$y),max(cardinaldata2$y))))
+  ##determine which pixels are retained during combination (must be present in both datasets)
+  #use 'X..Y..' for unique indexing
+  ds1_xy <- paste0('X',cardinaldata1$x,'Y',cardinaldata1$y)
+  ds2_xy <- paste0('X',cardinaldata2$x,'Y',cardinaldata2$y)
+  
+  ds_intersection <- intersect(ds1_xy,ds2_xy)
+  
+  ds1_retained_pixels <- which(ds1_xy %in% ds_intersection)
+  ds2_retained_pixels <- which(ds2_xy %in% ds_intersection)
+  
+  #subset retained pixels
+  cardinaldata1 <- cardinaldata1[,ds1_retained_pixels]
+  cardinaldata2 <- cardinaldata2[,ds2_retained_pixels]
+  
+  if ('origin' %in% varLabels(cardinaldata1@featureData)){
+  } else {
+    cardinaldata1@featureData$ds_origin <- ds1_name
+  }
+  
+  cardinaldata2@featureData$ds_origin <- ds2_name
 
-  mz_cardinaldata1 <- Cardinal::mz(cardinaldata1)
-  mz_cardinaldata2 <- Cardinal::mz(cardinaldata2)
-  
-  binary_mask_cardinaldata1 <- cardinaldata1$binary_mask
-  binary_mask_cardinaldata2 <- cardinaldata2$binary_mask
-  
-  #sort coordinates, and data
-  cardinaldata1_df <- arrange(cbind(pData(cardinaldata1)[,1:3],t(iData(cardinaldata1)),binary_mask_cardinaldata1),x,y)
-  cardinaldata2_df <- arrange(cbind(pData(cardinaldata2)[,1:3],t(iData(cardinaldata2)),binary_mask_cardinaldata2),x,y)
-  
-  keep_idx = which(cardinaldata1_df$binary_mask + cardinaldata2_df$binary_mask == 2)
-  
-  
-  #organize 
-  cardinaldata1_2_df <- cbind(cardinaldata1_df[1:(ncol(cardinaldata1_df)-1)][keep_idx,], cardinaldata2_df[4:(ncol(cardinaldata2_df) -1)][keep_idx,])
-  levels(cardinaldata1_2_df$sample)[1] <- sample_name
-  
+  mz_sortvector <- sort(c(Cardinal::mz(cardinaldata1),Cardinal::mz(cardinaldata2)),index.return=T)
+
   ##make new MSIageSet:
-  combined <- MSImageSet(spectra=t(cardinaldata1_2_df[,!names(cardinaldata1_2_df) %in% c("x","y","sample")]), 
-                          coord=cardinaldata1_2_df[c("x","y","sample")], 
-                          mz=c(mz_cardinaldata1,mz_cardinaldata2+mz_offset),
+  combined <- MSImageSet(spectra=rbind(iData(cardinaldata1), 
+                                         iData(cardinaldata2))[mz_sortvector$ix,], 
+                          coord=data.frame(coord(cardinaldata1)[c("x","y")],sample=combined_name,row.names=NULL), 
+                          mz=mz_sortvector$x,
                           processingData = processingData(cardinaldata1),
                           protocolData = protocolData(cardinaldata1),
                           experimentData = experimentData(cardinaldata1))
   
+  
+  combined@featureData$ds_origin = c(cardinaldata1@featureData$ds_origin, cardinaldata2@featureData$ds_origin)[mz_sortvector$ix]
   
   return(combined)
 }
