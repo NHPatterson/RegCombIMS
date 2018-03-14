@@ -58,21 +58,37 @@ tformed_s000_cer = applyNifty(s000_cer, reg_s_to_he_nonlinear_pca, padding=0, in
 
 image(d001_cer, mz=885.54, main="(-)DAN pre-transform")
 image(tformed_d001_cer, mz=885.54, main="(-)DAN non-linear transformed")
-image(s000_cer, mz=493.25, main="AgLDI pre-transform")
-image(tformed_s000_cer, mz=493.25, main="AgLDI non-linear transformed")
+image(s000_cer, mz=493.39, main="AgLDI pre-transform")
+image(tformed_s000_cer, mz=493.39, main="AgLDI non-linear transformed")
 
 ##combine the datasets into a single dataset:
 #rescale intensity data between 0 and 1 for each dataset
 iData(tformed_d001_cer) = iData(tformed_d001_cer) / max(iData(tformed_d001_cer))
 iData(tformed_s000_cer) = iData(tformed_s000_cer) / max(iData(tformed_s000_cer))
 
-DAN_AgLDI_comb <- RegCombIMS::combineReggedIMS(tformed_d001_cer,tformed_s000_cer,mz_offset=2000,sample_name="(-)DAN_AgLDI_comb_2000os")
+
+
+DAN_AgLDI_comb <- combineReggedIMS(tformed_d001_cer,tformed_s000_cer, ds1_name = "DAN_data", ds2_name = "AgLDI data", combined_name="(-)DAN_AgLDI_comb")
+
 
 image(DAN_AgLDI_comb , mz=885.54, main="(-)DAN, combined")
-image(DAN_AgLDI_comb , mz=2493.25, main="AgLDI, combined")
+image(DAN_AgLDI_comb , mz=493.39, main="AgLDI, combined")
 
 #overlay image:
-image(DAN_AgLDI_comb , mz=c(885.54,2493.25), col=c("red","green"),
+image(DAN_AgLDI_comb , mz=c(885.54,493.39), col=c("red","green"),
       normalize.image = "linear",superpose=T, main="overlaid ion images", contrast.enhance="suppression")
+
+#do correlation querying...      
+cor_mat = getCorrelationMat(DAN_AgLDI_comb)
+
+correlationQuery(DAN_AgLDI_comb, cor_mat,
+                 query_dataset = 'AgLDI data', query_against = 'DAN_data',
+                 query_mz = 493.39, plot_ions=T, top_n = 9, 
+                 layout=c(2,5))
+
+correlationQuery(DAN_AgLDI_comb, cor_mat,
+                 query_dataset = 'DAN_data', query_against = 'AgLDI data',
+                 query_mz = 774.6,plot_ions=T, top_n = 9, 
+                 layout=c(2,5))
 
 #See http://cardinalmsi.org for documentation on using Cardinal for data analysis
