@@ -1,5 +1,5 @@
 #Code for the use of the IMS data analysis pipeline described in:
-#"Co-registration and analysis of multiple imag-ing mass spectrometry datasets targeting dif-ferent analytes"
+#"Co-registration and analysis of multiple imag-ing mass spectrometry datasets targeting different analytes"
 #Nathan Heath Patterson, Ethan Yang, Elizabeth-Ann Kranjec, Pierre Chaurand
 #...
 
@@ -81,12 +81,12 @@ image(DAN_AgLDI_comb , mz=c(885.54,493.39), col=c("red","green"),
 #do correlation querying...      
 cor_mat = getCorrelationMat(DAN_AgLDI_comb)
 
-correlationQuery(DAN_AgLDI_comb, cor_mat,
+top_493_AgLDI = correlationQuery(DAN_AgLDI_comb, cor_mat,
                  query_dataset = 'AgLDI data', query_against = 'DAN_data',
                  query_mz = 493.39, plot_ions=T, top_n = 9, 
                  layout=c(2,5))
 
-correlationQuery(DAN_AgLDI_comb, cor_mat,
+top_774_DAN = correlationQuery(DAN_AgLDI_comb, cor_mat,
                  query_dataset = 'DAN_data', query_against = 'AgLDI data',
                  query_mz = 774.6,plot_ions=T, top_n = 9, 
                  layout=c(2,5))
