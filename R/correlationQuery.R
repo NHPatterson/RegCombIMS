@@ -1,6 +1,6 @@
 #' @export
 #' @title Query correlation matrix for top markers accross combined data sets
-#' @description 
+#' @description query correlations accross datasets by name
 #' @param combined_cardinaldata an object of class "MSImageSet", combined dataset
 #' @param correlation_matrix object generated from getCorrelationMatrix
 #' @param query_dataset name of the dataset in 'ds_origin' that we wish to query for
