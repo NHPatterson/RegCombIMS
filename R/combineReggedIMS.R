@@ -25,7 +25,7 @@ combineReggedIMS <- function(cardinaldata1,cardinaldata2,ds1_name = "dataset1",d
   cardinaldata1 <- cardinaldata1[,ds1_retained_pixels]
   cardinaldata2 <- cardinaldata2[,ds2_retained_pixels]
   
-  if ('origin' %in% varLabels(cardinaldata1@featureData)){
+  if ('ds_origin' %in% varLabels(cardinaldata1@featureData)){
   } else {
     cardinaldata1@featureData$ds_origin <- ds1_name
   }
