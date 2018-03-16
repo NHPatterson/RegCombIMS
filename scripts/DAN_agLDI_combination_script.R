@@ -66,9 +66,12 @@ image(tformed_s000_cer, mz=493.39, main="AgLDI non-linear transformed")
 iData(tformed_d001_cer) = iData(tformed_d001_cer) / max(iData(tformed_d001_cer))
 iData(tformed_s000_cer) = iData(tformed_s000_cer) / max(iData(tformed_s000_cer))
 
-
+##optionally add m/z offset to dataset...
+#Cardinal::mz(tformed_s000_cer) = Cardinal::mz(tformed_s000_cer) + 2000
+#later plotting will require adding this offset to the mz value where appropriate
 
 DAN_AgLDI_comb <- combineReggedIMS(tformed_d001_cer,tformed_s000_cer, ds1_name = "DAN_data", ds2_name = "AgLDI data", combined_name="(-)DAN_AgLDI_comb")
+
 
 
 image(DAN_AgLDI_comb , mz=885.54, main="(-)DAN, combined")
