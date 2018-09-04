@@ -1,5 +1,5 @@
 # RegCombIMS
-Code accompanying "Co-registration and analysis of multiple imaging mass spectrometry datasets targeting different analytes".
+Code accompanying ["Co-registration and analysis of multiple imaging mass spectrometry datasets targeting different analytes"](https://doi.org/10.1093/bioinformatics/bty780) Please cite this work if you use this tool in your own analysis.
 
 This repository contains code to demo the analysis pipeline described in "Co-registration and analysis of multiple imaging mass spectrometry datasets targeting different analytes"
 
@@ -17,7 +17,9 @@ devtools::install_github("nhpatterson/RegCombIMS")
 ```
 
 ## Demo
-See demo example  in /scripts
+[See demo example combining two datasets](https://github.com/NHPatterson/RegCombIMS/blob/master/scripts/DAN_agLDI_combination_script.R)
 
 ### Contact:
 Heath Patterson nathan.h.patterson@vanderbilt.edu
+
+Please use the GitHub issue tracker for any errors encountered using this tool. I will try to solve them ASAP.
