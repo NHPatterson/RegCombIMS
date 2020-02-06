@@ -49,5 +49,7 @@ combineReggedIMS <- function(cardinaldata1,cardinaldata2,ds1_name = "dataset1",d
                          protocolData = protocolData(cardinaldata1),
                          experimentData = experimentData(cardinaldata1))
   
+  combined@featureData$ds_origin <- c(cardinaldata1@featureData$ds_origin, 
+                                      cardinaldata2@featureData$ds_origin)[mz_sortvector$ix]
   return(combined)
 }
